@@ -1,0 +1,218 @@
+@import './assets/styles/_variables';
+
+.basket {
+  height: 100%;
+  gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: auto 1fr;
+  justify-items: center;
+  overflow: hidden;
+  padding: 40px 0px;
+  & label, & input, & button {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif !important;
+    font-weight: 500;
+  }
+  & button {
+    font-size: 16px;
+    padding: 7px 25px;
+  }
+  &__container {
+    max-width: 1440px;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    flex-direction: column;
+    gap: 40px;
+    overflow: hidden;
+  }
+  &__title {
+    flex-grow: 0;
+    font-size: 48px;
+    text-align: center;
+    color: $text-accent-secondary;
+  }
+  &__form {
+    grid-column: 1/3;
+    grid-row: 1/2;
+    border-radius: 15px;
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-end;
+    background: $form-bg;
+    box-shadow: 0px 0px 10px rgba($color: $text-primary, $alpha: .1);
+    &-inputs {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 325px 1fr 1fr;
+      gap: 20px;
+    }
+  }
+  &__table {
+    grid-column: 1/2;
+    grid-row: 2/2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: auto;
+    &-header {
+      display: flex;
+      gap: 20px;
+      justify-content: space-between;
+      align-items: center;
+      color: $text-secondary;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 15px 10px;
+      border-bottom: 2px solid $table-header-border;
+      & p {
+        display: inline;
+      }
+      & big {
+        font-size: 18px;
+        font-weight: 700;
+        color: $text-accent-primary;
+      }
+    }
+    &-price {
+      display: flex;
+      align-items: flex-end;
+      gap: 5px;
+      & p {
+        font-size: 16px;
+        font-weight: 400;
+        text-decoration: line-through;
+      }
+      & big {
+        font-size: 18px;
+        font-weight: 700;
+        color: $text-accent-primary;
+      }
+      & small {
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+    &-body {
+      position: relative;
+      padding: 15px 10px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      overflow: auto;
+    }
+    &-empty {
+      position: absolute;
+      left: 50%;
+      top: 0px;
+      transform: translateX(-50%);
+      font-size: 18px;
+      font-weight: 700;
+      color: $text-accent-secondary;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  &__discounts {
+    padding: 5px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      padding: 20px 30px;
+      border-radius: 5px;
+      background: $discount-bg;
+      box-shadow: 0px 0px 10px rgba($color: $text-primary, $alpha: .1);
+      & button {
+        padding: 5px 15px;
+        text-transform: none;
+      }
+    }
+    &-title {
+      font-size: 14px;
+      font-weight: 400;
+      color: $text-secondary;
+      width: 100%;
+    }
+    
+  }
+}
+
+@media screen and (max-width: 1480px) {
+  .basket {
+    &__container {
+      max-width: none;
+      padding: 0px 20px;
+    }
+    &__table-body {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .basket {
+    &__form {
+      &-inputs {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    &__table-body {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media screen and (max-width: 786px) {
+  .basket {
+    overflow: auto;
+    height: auto;
+    padding: 20px 0px;
+    gap: 20px;
+    &__container {
+      grid-template-rows: auto auto 1fr;
+      overflow: auto;
+      gap: 20px;
+    }
+    &__form {
+      grid-column: 1/1;
+      &-inputs {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    &__table {
+      grid-column: 1/1;
+      grid-row: 3/3;
+    }
+    &__table-header {
+      & p {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    &__table-body {
+      grid-template-columns: repeat(1, 1fr);
+      height: 100%;
+    }
+    &__discounts {
+      grid-column: 1/1;
+      grid-row: 2/3;
+      align-items: flex-end;
+      &-wrapper {
+        width: 100%;
+        align-items: flex-end;
+      }
+    }
+  }
+}
