@@ -9,19 +9,12 @@ type ProductCardProps = {
   price: number,
   discount: number,
   onDelete: Function,
-  onSelect: Function
 }
 
-export const ProductCard: FC<ProductCardProps> = ({ article, name, price, discount, onDelete, onSelect }) => {
-
-  const handleSelectProduct = (event: MouseEvent) => {
-    if ((event.target as HTMLElement).tagName !== 'BUTTON') {
-      onSelect(article)
-    }
-  }
+export const ProductCard: FC<ProductCardProps> = ({ article, name, price, discount, onDelete }) => {
 
   return (
-    <article className="product-card" onClick={handleSelectProduct}>
+    <article className="product-card">
       <p className="product-card__article">#{ article }</p>
       <p className="product-card__name">{name}</p>
       <div className="product-card__footer">

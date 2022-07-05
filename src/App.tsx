@@ -11,7 +11,6 @@ function App() {
   const [productsWithDiscount, setProductsWithDiscount] = useState(0)
   const [totalPriceWithoutDiscount, setTotalPriceWithoutDiscount] = useState(0)
   const [totalPrice, setTotalPrice] = useState(0)
-  const [selectedProduct, setSelectedProduct] = useState<TProduct | null>(null)
 
   const [formValues, setFormValues] = useState({
     article: 0, name: '', price: 0
@@ -135,23 +134,9 @@ function App() {
    */
   const deleteProduct = (article: number) => {
     const newProducts = [ ...products ]
-    if (article === selectedProduct?.article) setSelectedProduct(null) // если удаляемый артикл совпадает с выбранным товаром, снимаем выделения
     newProducts.splice(newProducts.findIndex(product => product.article === article), 1)
     setProducts(newProducts)
     saveToLocalStorage(newProducts)
-  }
-
-  /**
-   * Выбирает товар для открытия окна скидок
-   * @param article Идентификатор выбранного товара
-   */
-  const selectProduct = (article: number) => {
-    if (selectedProduct && selectedProduct.article === article) {
-      return setSelectedProduct(null)
-    }
-    const product = products.find(item => item.article === article)
-    setSelectedProduct(product ? product : null)
-    setDiscountValue(product ? product.discount * 100 : 0)
   }
 
   /**
@@ -166,33 +151,23 @@ function App() {
       return setDiscountError({ isError: true, message: 'Скидка больше 100' })
     }
     setDiscountError({ isError: false, message: '' })
-
-    if (selectedProduct) {
-      const newDiscount = +(discountValue / 100).toFixed(2) // перевод скидки в десятичную дробь
-      setSelectedProduct({ ...selectedProduct, discount: newDiscount }) 
-      const newProducts = [ ...products ]
-      const product = newProducts.find(item => item.article === selectedProduct.article)
-      if (product) {
-        product.discount = newDiscount
-      }
-      setProducts(newProducts)
-      saveToLocalStorage(newProducts)
-    }
+    const newDiscount = +(discountValue / 100).toFixed(2) // перевод скидки в десятичную дробь
+    
+    const newProducts = [ ...products ]
+    newProducts.forEach(product => product.discount = newDiscount)
+    setProducts(newProducts)
+    saveToLocalStorage(newProducts)
   }
 
   /**
    * Выставляет скидки в 0 у всех товаров
    */
   const clearAllDiscount = () => {
-    if (selectedProduct) {
-      setSelectedProduct({ ...selectedProduct, discount: 0 }) 
-      const newProducts = [ ...products ]
-      newProducts.forEach((item) => item.discount = 0)
-      setProducts(newProducts)
-      setSelectedProduct({ ...selectedProduct, discount: 0 })
-      setDiscountValue(0)
-      saveToLocalStorage(newProducts)
-    }
+    const newProducts = [ ...products ]
+    newProducts.forEach((item) => item.discount = 0)
+    setProducts(newProducts)
+    setDiscountValue(0)
+    saveToLocalStorage(newProducts)
   }
 
   // Изменяет значение скидки в input
@@ -242,11 +217,7 @@ function App() {
           </div>
           <Button variant='contained' onClick={addProduct}>Добавить</Button>
         </section>
-        <section className='basket__table' style={
-          !matchesTable
-            ? { gridColumn: `${ selectedProduct !== null ? '1/2' : '1/3' }` }
-            : { }
-        }>
+        <section className='basket__table'>
           <div className="basket__table-header">
             <p className="basket__table-count">Всего товаров: <big>{products.length}</big></p>
             {
@@ -282,34 +253,27 @@ function App() {
             {
               products.length === 0
                 ? <p className='basket__table-empty'>Список пуст</p>
-                : products.map((item, index) => <ProductCard { ...item } key={item.article} onDelete={deleteProduct} onSelect={selectProduct} />)
+                : products.map((item, index) => <ProductCard { ...item } key={item.article} onDelete={deleteProduct} />)
             }
           </div>
         </section>
-        {
-          selectedProduct !== null
-            ? (
-              <section className="basket__discounts">
-                <div className="basket__discounts-wrapper">
-                  <p className="basket__discounts-title">Выбранный товар: #{selectedProduct.article}</p>
-                  <TextField 
-                    type='number' 
-                    label="Скидка" 
-                    size='small' 
-                    value={discountValue}
-                    onChange={handleChangeDiscount}
-                    inputProps={{ min: 0, max: 100 }}
-                    error={discountError.isError}
-                    helperText={discountError.isError ? discountError.message : ''}
-                    fullWidth={matchesTable}
-                  />
-                  <Button variant='outlined' size='small' onClick={addDiscount}>Установить скидку</Button>
-                </div>
-                <Button variant='contained' onClick={clearAllDiscount}>Убрать скидки</Button>
-              </section>
-            )
-            : null
-        }
+        <section className="basket__discounts">
+          <div className="basket__discounts-wrapper">
+            <TextField 
+              type='number' 
+              label="Скидка" 
+              size='small' 
+              value={discountValue}
+              onChange={handleChangeDiscount}
+              inputProps={{ min: 0, max: 100 }}
+              error={discountError.isError}
+              helperText={discountError.isError ? discountError.message : ''}
+              fullWidth={matchesTable}
+            />
+            <Button variant='outlined' size='small' onClick={addDiscount}>Установить скидку</Button>
+          </div>
+          <Button variant='contained' onClick={clearAllDiscount}>Убрать скидки</Button>
+        </section>
       </div>
     </main>
   );
