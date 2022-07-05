@@ -121,8 +121,9 @@ function App() {
    */
   const addProduct = () => {
     if (!validateFormValues()) return 
+    const newDiscount = +(discountValue / 100).toFixed(2) // перевод скидки в десятичную дробь
     const newProducts = [ ...products ]
-    newProducts.push({ ...formValues, discount: 0 })
+    newProducts.push({ ...formValues, discount: newDiscount })
     setProducts(newProducts)
     setFormValues({ article: 0, name: '', price: 0 })
     saveToLocalStorage(newProducts)
