@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "./static/css/main.679f22b5.css",
+    "main.js": "./static/js/main.164523e5.js",
+    "static/media/inter-v11-latin_cyrillic-700.woff": "./static/media/inter-v11-latin_cyrillic-700.b29e9f07d570f0b28921.woff",
+    "static/media/inter-v11-latin_cyrillic-800.woff": "./static/media/inter-v11-latin_cyrillic-800.15e7d76edc19c1007ccd.woff",
+    "static/media/inter-v11-latin_cyrillic-600.woff": "./static/media/inter-v11-latin_cyrillic-600.c3a7be5554430477b184.woff",
+    "static/media/inter-v11-latin_cyrillic-500.woff": "./static/media/inter-v11-latin_cyrillic-500.35529817e371b4cdbf01.woff",
+    "static/media/inter-v11-latin_cyrillic-300.woff": "./static/media/inter-v11-latin_cyrillic-300.79e66a271625cd002632.woff",
+    "static/media/inter-v11-latin_cyrillic-regular.woff": "./static/media/inter-v11-latin_cyrillic-regular.e154f2936e843fb5568c.woff",
+    "static/media/inter-v11-latin_cyrillic-800.woff2": "./static/media/inter-v11-latin_cyrillic-800.5ef72c3ffdce1d14970d.woff2",
+    "static/media/inter-v11-latin_cyrillic-700.woff2": "./static/media/inter-v11-latin_cyrillic-700.b232970bda67c97fa661.woff2",
+    "static/media/inter-v11-latin_cyrillic-600.woff2": "./static/media/inter-v11-latin_cyrillic-600.f33bac78f2e33e524e73.woff2",
+    "static/media/inter-v11-latin_cyrillic-500.woff2": "./static/media/inter-v11-latin_cyrillic-500.1f6ed1cbe8940cb02696.woff2",
+    "static/media/inter-v11-latin_cyrillic-300.woff2": "./static/media/inter-v11-latin_cyrillic-300.5bded7cb2c2a301d77f4.woff2",
+    "static/media/inter-v11-latin_cyrillic-regular.woff2": "./static/media/inter-v11-latin_cyrillic-regular.3450f06ef9b75d403809.woff2",
+    "index.html": "./index.html",
+    "main.679f22b5.css.map": "./static/css/main.679f22b5.css.map",
+    "main.164523e5.js.map": "./static/js/main.164523e5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.679f22b5.css",
+    "static/js/main.164523e5.js"
+  ]
+}
